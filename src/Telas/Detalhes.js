@@ -1,0 +1,116 @@
+import React from "react";
+
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Dimensions, Image } from "react-native"
+
+const width = Dimensions.get('screen').width
+const height = Dimensions.get('screen').height
+
+export default function Detalhes({ navigation, route }) {
+  const { nome, ano, genero, id, capa } = route.params
+  return (
+    <ScrollView style={estilos.fundo}>
+      <View style={estilos.topo}>
+      <Text style={estilos.sobre}>Sobre o Filme</Text>
+
+      </View>
+
+      <View style={estilos.filmes}>
+          <Image
+          source={{ uri: capa }}
+          style={estilos.imagem}
+          resizeMode="contain"
+        />
+      </View>
+      <View style={estilos.informacoes}>
+        <Text style={estilos.informacao}>Nome: {nome}</Text>
+        <Text style={estilos.informacao}>Ano de Lançamento: {ano}</Text>
+        <Text style={estilos.informacao}>Gênero: {genero}</Text>
+      </View>
+        
+      <TouchableOpacity style={estilos.voltar}
+      onPress={() =>
+          navigation.navigate('HomeScreen')
+        }
+      >
+        <Text style={estilos.textoVoltar}>Voltar</Text>
+      </TouchableOpacity>
+ 
+    </ScrollView>
+
+  )
+};
+
+const estilos = StyleSheet.create({
+  topo:{
+     backgroundColor: "#9b0000",
+    height: height * 0.13,
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    borderColor: 'black',
+    borderWidth: 5
+  },
+  sobre:{
+    color: 'white',
+    fontSize: 40,
+    marginTop: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    textShadowColor: 'black',
+    textShadowOffset: { width: 5, height: 0 },
+    textShadowRadius: 0.1,
+  },
+
+  fundo: {
+    height: height,
+    backgroundColor: 'black',
+    width: width
+  },
+  filmes: {
+    width: width * 0.7,
+    margin: 'auto',
+    marginVertical: 30,
+
+  },
+  imagem: {
+    width: '100%',
+    height: width,
+    borderRadius: 10,
+
+  },
+  
+  voltar:{
+    backgroundColor: '#b30000',
+    width: width*0.5,
+    borderRadius: 12,
+    margin: 'auto',
+    padding: 30,
+    marginTop: 20
+  },
+  textoVoltar:{
+    color:'white',
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  informacoes:{
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginTop: 5,
+    backgroundColor: '#550000',
+    padding: 15,
+  },
+  informacao:{
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 20,
+    lineHeight: 40,
+    marginLeft: 40
+  }
+});
