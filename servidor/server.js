@@ -55,14 +55,14 @@ app.get('/filmes/:id', (req, res) => {
 ========================= */
 app.post('/filmes', (req, res) => {
 
-  const { id, nome, ano, genero, capa } = req.body;
+  const { id, nome, ano, genero, capa, trailer } = req.body;
 
   const sql = `
-    INSERT INTO filmes (id, nome, ano, genero, capa)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO filmes (id, nome, ano, genero, capa, trailer)
+    VALUES (?, ?, ?, ?, ?, ?)
   `;
 
-  conexao.query(sql, [id, nome, ano, genero, capa], (erro) => {
+  conexao.query(sql, [id, nome, ano, genero, capa, trailer], (erro) => {
     if (erro) {
       return res.status(500).json(erro);
     }
@@ -78,11 +78,11 @@ app.post('/filmes', (req, res) => {
 app.put('/filmes/:id', (req, res) => {
 
   const id = req.params.id;
-  const { nome, ano, genero, capa } = req.body;
+  const { nome, ano, genero, capa, trailer } = req.body;
 
   const sql = `
     UPDATE filmes 
-    SET nome = ?, ano = ?, genero = ?, capa = ?
+    SET nome = ?, ano = ?, genero = ?, capa = ?, trailer = ?
     WHERE id = ?
   `;
 

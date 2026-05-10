@@ -22,7 +22,7 @@ export default function App() {
   }
 
   async function adicionaFilme(novoFilme) {
-   
+    console.log(novoFilme);
     await fetch(API, {
       method: "POST",
       headers: {
@@ -37,6 +37,7 @@ export default function App() {
 
 
   async function deletarFilme(id) {
+    
     await fetch(`${API}/${id}`, {
       method: "DELETE"
     });

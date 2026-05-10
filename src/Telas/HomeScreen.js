@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useEffect } from "react";
+
 import { Text, View, StyleSheet, TouchableOpacity, FlatList, Dimensions, Button, Image, ScrollView } from "react-native"
 
 const width = Dimensions.get('screen').width
@@ -26,6 +28,9 @@ export default function HomeScreen({ navigation, filmes, carregarFilmes, adicion
 
   )
 
+  useEffect(() => {
+      carregarFilmes();
+    }, []);
 
   return (
     <View style={estilos.fundo}>

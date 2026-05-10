@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { StyleSheet, View, ScrollView, Text, Touchable, TouchableOpacity, TextInput, Dimensions } from "react-native";
 
+
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
 
@@ -12,6 +13,17 @@ export default function Adiciona({ navigation, route }) {
   const [ano, setAno] = useState("");
   const [genero, setGenero] = useState("");
   const [capa, setCapa] = useState("");
+  const [trailer, setTrailer] = useState("");
+
+  const getEmbedUrl = (url) => {
+    if (!url) return "";
+
+    const id = url.includes("youtu.be")
+      ? url.split("youtu.be/")[1]?.split("?")[0]
+      : url.split("v=")[1]?.split("&")[0];
+
+    return `https://www.youtube.com/embed/${id}`;
+  };
 
 
   return (
@@ -50,6 +62,13 @@ export default function Adiciona({ navigation, route }) {
           style={estilos.input}
         />
 
+        <TextInput
+          placeholder="Link do Trailer"
+          value={trailer}
+          onChangeText={setTrailer} //arrumar colocar o TEXT
+          style={estilos.input}
+        />
+
       </View>
 
 
@@ -57,15 +76,15 @@ export default function Adiciona({ navigation, route }) {
         style={estilos.botaoAdicionar}
 
         onPress={() => {
-          if ((nome, ano, genero, capa)!= "" ){
-            const novoFilme = { nome, ano: Number(ano), genero, capa }
-          { adicionaFilme(novoFilme) }
-          navigation.navigate('HomeScreen')
+          if ((nome && ano && genero && capa && trailer) != "") {
+            const novoFilme = { nome, ano: Number(ano), genero, capa, trailer: getEmbedUrl(trailer) }
+            { adicionaFilme(novoFilme) }
+            navigation.navigate('HomeScreen')
           }
-          else{
+          else {
             alert("Faltam informações")
           }
-          
+
         }}>
 
         <Text style={estilos.textoAdiciona}>Adicionar</Text>
@@ -98,7 +117,8 @@ const estilos = StyleSheet.create({
     fontWeight: '600',
     display: 'flex',
     flexWrap: 'wrap',
-    padding: 20
+    padding: 20,
+    width: width * 0.8
 
   },
   botaoVoltar: {
@@ -128,24 +148,24 @@ const estilos = StyleSheet.create({
     paddingVertical: 20,
     textShadowRadius: 0.1,
   },
-  inputs:{
+  inputs: {
     backgroundColor: '#black',
     marginTop: 40,
-    width: width*0.8,
+    width: width * 0.8,
     margin: 'auto',
     borderRadius: 10,
     paddingVertical: 20
   },
-  botaoAdicionar:{
+  botaoAdicionar: {
     backgroundColor: '#570000',
-    width: width*0.5,
+    width: width * 0.5,
     borderRadius: 12,
     margin: 'auto',
     padding: 10,
     marginTop: 20
   },
-  textoAdiciona:{
-    color:'white',
+  textoAdiciona: {
+    color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center'
