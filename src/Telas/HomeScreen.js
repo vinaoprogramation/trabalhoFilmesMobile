@@ -5,22 +5,31 @@ import { Text, View, StyleSheet, TouchableOpacity, FlatList, Dimensions, Button,
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
 
-export default function HomeScreen({ navigation, filmes, carregarFilmes }) {
+export default function HomeScreen({ navigation, filmes, carregarFilmes, adicionaFilme, deletarFilme }) {
 
-  const cabecalho = () =>(
+  const cabecalho = () => (
     <View style={estilos.topo}>
-        <Text style={estilos.titulo}>NerdFLIX</Text>
+      <Text style={estilos.titulo}>NerdFLIX</Text>
     </View>
   )
 
   const rodape = () => (
-    <Text style={estilos.copyright}>Todos os direitos reservados</Text>
+    <View>
+      <TouchableOpacity style={estilos.adicionar}
+        onPress={() => {
+          navigation.navigate('Adiciona', { adicionaFilme })
+        }}>
+        <Text style={estilos.adicionarTexto}>Adicionar Filme</Text>
+      </TouchableOpacity>
+      <Text style={estilos.copyright}>Todos os direitos reservados</Text>
+    </View>
+
   )
 
 
   return (
     <View style={estilos.fundo}>
-      
+
       <FlatList
         style={estilos.lista}
         data={filmes}
@@ -28,7 +37,7 @@ export default function HomeScreen({ navigation, filmes, carregarFilmes }) {
         renderItem={({ item }) => (
           <View style={estilos.filmes}>
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Detalhes', item)
+              navigation.navigate('Detalhes', { ...item, deletarFilme })
             }}>
               <Image
                 source={{ uri: item.capa }}
@@ -38,7 +47,9 @@ export default function HomeScreen({ navigation, filmes, carregarFilmes }) {
             </TouchableOpacity>
 
             <Text style={estilos.texto}> {item.nome} - {item.ano}                                   {item.genero}</Text>
-            
+
+
+
           </View>
         )}
 
@@ -47,7 +58,7 @@ export default function HomeScreen({ navigation, filmes, carregarFilmes }) {
       />
 
 
-      
+
     </View>
 
   )
@@ -70,9 +81,7 @@ const estilos = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 20,
     borderColor: 'black',
-    borderWidth: 5
   },
   titulo: {
     color: 'white',
@@ -106,10 +115,24 @@ const estilos = StyleSheet.create({
     padding: 15,
     borderRadius: 5
   },
-  copyright:{
-    color:'white',
+  copyright: {
+    color: 'white',
     marginBottom: 50,
     marginTop: 20,
+    textAlign: 'center'
+  },
+  adicionar: {
+    backgroundColor: 'white',
+    marginTop: 30,
+    borderRadius: 5,
+    padding: 10,
+    width: width*0.6,
+    margin: 'auto'
+  },
+  adicionarTexto: {
+    color: 'black',
+    fontSize: 25,
+    fontWeight: 'bold',
     textAlign: 'center'
   }
 });

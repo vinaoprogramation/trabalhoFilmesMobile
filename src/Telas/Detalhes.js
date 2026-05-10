@@ -6,7 +6,9 @@ const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
 
 export default function Detalhes({ navigation, route }) {
-  const { nome, ano, genero, id, capa } = route.params
+  const { nome, ano, genero, id, capa, deletarFilme } = route.params
+
+
   return (
     <ScrollView style={estilos.fundo}>
       <View style={estilos.topo}>
@@ -26,6 +28,16 @@ export default function Detalhes({ navigation, route }) {
         <Text style={estilos.informacao}>Ano de Lançamento: {ano}</Text>
         <Text style={estilos.informacao}>Gênero: {genero}</Text>
       </View>
+
+      <TouchableOpacity style={estilos.deletar}
+      onPress={() => {
+        {deletarFilme(id)}
+        navigation.navigate('HomeScreen')
+      }}
+      >
+        <Text style={estilos.textoDeletar}>Deletar Filme</Text>
+      </TouchableOpacity>
+ 
         
       <TouchableOpacity style={estilos.voltar}
       onPress={() =>
@@ -49,9 +61,7 @@ const estilos = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 20,
     borderColor: 'black',
-    borderWidth: 5
   },
   sobre:{
     color: 'white',
@@ -89,11 +99,26 @@ const estilos = StyleSheet.create({
     borderRadius: 12,
     margin: 'auto',
     padding: 30,
-    marginTop: 20
+    marginTop: 30,
+    marginBottom: 20
   },
   textoVoltar:{
     color:'white',
     fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  deletar:{
+    backgroundColor: '#570000',
+    width: width*0.5,
+    borderRadius: 12,
+    margin: 'auto',
+    padding: 10,
+    marginTop: 20
+  },
+  textoDeletar:{
+    color:'white',
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center'
   },
