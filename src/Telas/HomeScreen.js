@@ -23,15 +23,16 @@ export default function HomeScreen({ navigation, filmes, carregarFilmes, adicion
         }}>
         <Text style={estilos.adicionarTexto}>Adicionar Filme</Text>
       </TouchableOpacity>
-      <Text style={estilos.copyright}>Todos os direitos reservados</Text>
+      <Text style={estilos.copyright}>Todos os direitos reservados ©</Text>
     </View>
 
   )
-
+  
   useEffect(() => {
       carregarFilmes();
     }, []);
 
+  
   return (
     <View style={estilos.fundo}>
 

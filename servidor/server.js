@@ -8,14 +8,14 @@ app.use(cors());
 app.use(express.json());
 
 /* =========================
-   ROTA TESTE
+  ROTA TESTE
 ========================= */
 app.get('/', (req, res) => {
   res.send("API de Filmes funcionando 🎬");
 });
 
 /* =========================
-   GET TODOS
+  GET TODOS
 ========================= */
 app.get('/filmes', (req, res) => {
 
@@ -32,7 +32,7 @@ app.get('/filmes', (req, res) => {
 });
 
 /* =========================
-   GET POR ID
+  GET POR ID
 ========================= */
 app.get('/filmes/:id', (req, res) => {
 
@@ -51,7 +51,7 @@ app.get('/filmes/:id', (req, res) => {
 });
 
 /* =========================
-   POST
+  POST
 ========================= */
 app.post('/filmes', (req, res) => {
 
@@ -73,7 +73,7 @@ app.post('/filmes', (req, res) => {
 });
 
 /* =========================
-   PUT
+  PUT
 ========================= */
 app.put('/filmes/:id', (req, res) => {
 
@@ -97,7 +97,7 @@ app.put('/filmes/:id', (req, res) => {
 });
 
 /* =========================
-   DELETE
+  DELETE
 ========================= */
 app.delete('/filmes/:id', (req, res) => {
 
@@ -116,7 +116,7 @@ app.delete('/filmes/:id', (req, res) => {
 });
 
 /* =========================
-   SERVER
+  SERVER
 ========================= */
 app.listen(3000,"0.0.0.0", () => {
   console.log("Servidor rodando em http://localhost:3000");
